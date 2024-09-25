@@ -1,7 +1,7 @@
 import React from 'react';
 import Task from './Task';  // Importa el componente Task para renderizar cada tarea
 
-function TaskList({ tasks, deleteTask }) {
+function TaskList({ tasks, deleteTask, toggleCompleteTask, updateTask }) {
   return (
     <ul>
       {tasks.map((task, index) => (
@@ -10,6 +10,8 @@ function TaskList({ tasks, deleteTask }) {
           task={task}
           index={index}
           deleteTask={deleteTask}
+          toggleCompleteTask={toggleCompleteTask}
+          updateTask={updateTask}
         />
       ))}
     </ul>

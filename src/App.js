@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import TaskList from './components/TaskList';  // Importa la lista de tareas
 import TaskForm from './components/TaskForm';  // Importa el formulario para agregar tareas
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'reactstrap';
 
 function App() {
   // Estado para gestionar las tareas. Comienza con un array vacío.
@@ -17,6 +19,20 @@ function App() {
     const newTasks = tasks.filter((_, index) => index !== taskIndex);  // Filtra las tareas eliminando la seleccionada
     setTasks(newTasks);  // Actualiza el estado con las tareas restantes
   };
+  // Función para marcar una tarea como completada
+  const toggleCompleteTask = (taskIndex) => {
+    const newTasks = tasks.map((task, index) =>
+      index === taskIndex ? { ...task, completed: !task.completed } : task
+    );
+    setTasks(newTasks);
+  };
+
+  const updateTask = (taskIndex, newText) => {
+    const newTasks = tasks.map((task, index) =>
+      index === taskIndex ? { ...task, text: newText } : task
+    );
+    setTasks(newTasks);
+  };
 
   return (
     <div className="App">
@@ -25,7 +41,7 @@ function App() {
       <TaskForm addTask={addTask} />
       
       {/* Renderiza la lista de tareas, pasándole las tareas y la función para eliminarlas */}
-      <TaskList tasks={tasks} deleteTask={deleteTask} />
+      <TaskList tasks={tasks} deleteTask={deleteTask} toggleCompleteTask={toggleCompleteTask} updateTask={updateTask} />
     </div>
   );
 }

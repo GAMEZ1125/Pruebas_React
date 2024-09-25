@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'reactstrap';
 
 function TaskForm({ addTask }) {
-  // Estado para manejar el texto de la nueva tarea
   const [taskText, setTaskText] = useState('');
 
-  // Función que se ejecuta cuando el formulario es enviado
   const handleSubmit = (e) => {
-    e.preventDefault();  // Previene la recarga de la página
-    if (taskText.trim() !== '') {  // Asegura que la tarea no esté vacía
-      addTask(taskText);  // Llama a la función del componente padre (App) para agregar la tarea
-      setTaskText('');  // Limpia el campo de texto
+    e.preventDefault();
+    if (taskText.trim() !== '') {
+      addTask(taskText);
+      setTaskText('');
     }
   };
 
@@ -19,11 +19,13 @@ function TaskForm({ addTask }) {
         type="text"
         placeholder="Nueva tarea"
         value={taskText}
-        onChange={(e) => setTaskText(e.target.value)}  // Actualiza el estado al escribir en el input
+        onChange={(e) => setTaskText(e.target.value)}
       />
-      <button type="submit">Agregar</button>
+      <Button color="primary" margin="2rem 2rem" type="submit">
+        Agregar
+      </Button>
     </form>
   );
 }
 
-export default TaskForm;
+export default TaskForm;
