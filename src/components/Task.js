@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Input } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faSave, faCheck, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function Task({ task, index, deleteTask, toggleCompleteTask, updateTask }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -37,14 +39,20 @@ function Task({ task, index, deleteTask, toggleCompleteTask, updateTask }) {
       </td>
       <td>
         {isEditing ? (
-          <Button onClick={handleUpdate} color="primary">Guardar</Button>
+          <Button onClick={handleUpdate} color="primary">
+            <FontAwesomeIcon icon={faSave} />
+          </Button>
         ) : (
           <>
-            <Button onClick={() => setIsEditing(true)} color="warning" className="mr-2">Editar</Button>
-            <Button onClick={() => toggleCompleteTask(index)} color="success" className="mr-2">
-              {task.completed ? 'Desmarcar' : 'Completar'}
+            <Button onClick={() => setIsEditing(true)} color="warning" className="mr-2">
+              <FontAwesomeIcon icon={faEdit} />
             </Button>
-            <Button onClick={() => deleteTask(index)} color="danger">Eliminar</Button>
+            <Button onClick={() => toggleCompleteTask(index)} color="success" className="mr-2">
+              <FontAwesomeIcon icon={task.completed ? faTimes : faCheck} />
+            </Button>
+            <Button onClick={() => deleteTask(index)} color="danger">
+              <FontAwesomeIcon icon={faTrash} />
+            </Button>
           </>
         )}
       </td>
