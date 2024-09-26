@@ -1,30 +1,47 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 function TaskForm({ addTask }) {
   const [taskText, setTaskText] = useState('');
+  const [deadline, setDeadline] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (taskText.trim() !== '') {
-      addTask(taskText);
+      addTask(taskText, deadline);
       setTaskText('');
+      setDeadline('');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Nueva tarea"
-        value={taskText}
-        onChange={(e) => setTaskText(e.target.value)}
-      />
-      <Button color="primary" margin="2rem 2rem" type="submit">
+    <Form onSubmit={handleSubmit} inline>
+      <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+        <Label for="taskText" className="mr-sm-2">Tarea</Label>
+        <Input
+          type="text"
+          name="taskText"
+          id="taskText"
+          placeholder="Nueva tarea"
+          value={taskText}
+          onChange={(e) => setTaskText(e.target.value)}
+        />
+      </FormGroup>
+      <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+        <Label for="deadline" className="mr-sm-2">Fecha límite</Label>
+        <Input
+          type="date"
+          name="deadline"
+          id="deadline"
+          value={deadline}
+          onChange={(e) => setDeadline(e.target.value)}
+        />
+      </FormGroup>
+      <Button color="primary" type="submit">
         Agregar
       </Button>
-    </form>
+    </Form>
   );
 }
 

@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
-import TaskList from './components/TaskList';  // Importa la lista de tareas
-import TaskForm from './components/TaskForm';  // Importa el formulario para agregar tareas
+import TaskList from './components/TaskList';
+import TaskForm from './components/TaskForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 function App() {
-  // Estado para gestionar las tareas. Comienza con un array vacío.
   const [tasks, setTasks] = useState([]);
 
-  // Función para agregar nuevas tareas
-  const addTask = (taskText) => {
-    const newTask = { text: taskText, completed: false };  // Cada tarea tiene un texto y un estado de completada
-    setTasks([...tasks, newTask]);  // Agrega la nueva tarea al estado
+  const addTask = (taskText, deadline) => {
+    const newTask = { text: taskText, deadline: deadline, completed: false };
+    setTasks([...tasks, newTask]);
   };
 
-  // Función para eliminar una tarea
   const deleteTask = (taskIndex) => {
-    const newTasks = tasks.filter((_, index) => index !== taskIndex);  // Filtra las tareas eliminando la seleccionada
-    setTasks(newTasks);  // Actualiza el estado con las tareas restantes
+    const newTasks = tasks.filter((_, index) => index !== taskIndex);
+    setTasks(newTasks);
   };
-  // Función para marcar una tarea como completada
+
   const toggleCompleteTask = (taskIndex) => {
     const newTasks = tasks.map((task, index) =>
       index === taskIndex ? { ...task, completed: !task.completed } : task
@@ -27,23 +24,29 @@ function App() {
     setTasks(newTasks);
   };
 
-  const updateTask = (taskIndex, newText) => {
+  const updateTask = (taskIndex, newText, newDeadline) => {
     const newTasks = tasks.map((task, index) =>
-      index === taskIndex ? { ...task, text: newText } : task
+      index === taskIndex ? { ...task, text: newText, deadline: newDeadline } : task
     );
     setTasks(newTasks);
   };
 
   return (
-    <div className="App">
-      <h1>Lista de Tareas</h1>
-      {/* Renderiza el formulario para agregar tareas */}
-      <TaskForm addTask={addTask} />
-      
-      {/* Renderiza la lista de tareas, pasándole las tareas y la función para eliminarlas */}
-      <TaskList tasks={tasks} deleteTask={deleteTask} toggleCompleteTask={toggleCompleteTask} updateTask={updateTask} />
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <h1 className="mt-4 mb-4">Lista de Tareas</h1>
+          <TaskForm addTask={addTask} />
+          <TaskList 
+            tasks={tasks} 
+            deleteTask={deleteTask} 
+            toggleCompleteTask={toggleCompleteTask} 
+            updateTask={updateTask} 
+          />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
-export default App;
+export default App;
