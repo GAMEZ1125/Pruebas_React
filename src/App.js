@@ -11,32 +11,36 @@ function Home({ tasks, addTask, deleteTask, toggleCompleteTask, updateTask }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Lógica para limpiar cualquier estado de autenticación si es necesario
     navigate('/');
   };
 
   return (
-    <Container>
+    <Container className="mt-5">
       <Row>
         <Col>
-          <div className="d-flex justify-content-between align-items-center mt-4 mb-4">
-            <h1>Lista de Tareas</h1>
-            <Button color="danger" onClick={handleLogout}>
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <h1 className="text-center">Lista de Tareas</h1>
+            <Button className="btn-logout" onClick={handleLogout}>
               Cerrar sesión
             </Button>
           </div>
-          <TaskForm addTask={addTask} />
-          <TaskList 
-            tasks={tasks} 
-            deleteTask={deleteTask} 
-            toggleCompleteTask={toggleCompleteTask} 
-            updateTask={updateTask} 
-          />
+          <div className="card-custom">
+            <TaskForm addTask={addTask} className="form-custom" />
+          </div>
+          <div className="card-custom mt-4">
+            <TaskList 
+              tasks={tasks} 
+              deleteTask={deleteTask} 
+              toggleCompleteTask={toggleCompleteTask} 
+              updateTask={updateTask} 
+            />
+          </div>
         </Col>
       </Row>
     </Container>
   );
 }
+
 
 function App() {
   const [tasks, setTasks] = useState([]);
