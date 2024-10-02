@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 .App {
+  font-family: Nunito, sans-serif;
   text-align: center;
 }
 
@@ -42,7 +43,7 @@ body {
   font-family: Nunito, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f8f9fa; /* Color de fondo suave */
+  background-color: #f8f9fa; 
 }
 
 h1 {
@@ -74,7 +75,7 @@ h1 {
 }
 
 .btn-custom:hover {
-  background-color: #0056b3; /* Color más oscuro al pasar el mouse */
+  background-color: #0056b3; 
   transition: background-color 0.3s ease-in-out;
 }
 
